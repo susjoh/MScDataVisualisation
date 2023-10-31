@@ -2,7 +2,7 @@
 
 This repository contains a tutorial on data visualisation using `ggplot2` for the Professional Skills in Ecology and Evolution module in the MSc Ecology, Evolution and Biodiversity at the University of Edinburgh.
 
-This practical covers: 
+This practical covers:
 
 * Why use ggplot2?
 * Histograms
