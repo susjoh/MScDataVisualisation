@@ -1,0 +1,12 @@
+name: MSc_Data_Visualisation
+title: MSc_Data_Visualisation
+username: susjoh
+account: susjoh
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10377550
+bundleId: 7875955
+url: https://susjoh.shinyapps.io/MSc_Data_Visualisation/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
