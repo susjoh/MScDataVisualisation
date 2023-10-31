@@ -67,7 +67,7 @@ One of **R**'s most powerful tools is its ability to produce publication quality
 
 Base **R** contains graphical tools for simple, exploratory graphics. These are easily called with functions such as `hist()` and `plot()`:
 
-```{r Ex3, exercise = T}
+```{r Ex3test, exercise = T}
 
 library(palmerpenguins)
 
