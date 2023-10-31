@@ -1,0 +1,11 @@
+Package: MscDataVisualisation
+Type: Package
+Title: A Tutorial for Teaching the Basics of Data Visualisation
+Version: 0.1.0
+Author: Susan Johnston
+Maintainer: Susan Johnston <Susan.Johnston@ed.ac.uk>
+Description: What it says on the tin.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
