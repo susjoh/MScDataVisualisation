@@ -1,0 +1,28 @@
+---
+title: "Data Visualisation in R"
+author: "Dr Susan Johnston [Susan.Johnston@ed.ac.uk](mailto:Susan.Johnston@ed.ac.uk)"
+date: "1st November 2023"
+output:
+  pdf_document: default
+  html_document: default
+
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(ggplot2)
+library(palmerpenguins)
+library(dplyr)
+
+```
+
+## Introduction
+
+Data visualisation is the visual representation of data in the form of plots, charts, maps and infographics. It is an accessible way to identify patterns and trends in your data, but can also tell you about the quality of your data and how it should be analysed.
+
+Data visualisation is an important part of our every day lives e.g such as on the BBC News (who use R to produce their graphics - see [here](https://bbc.github.io/rcookbook/) on how they do it!)
+
+Today we will learn how to make and customise four types of plots using the R library `ggplot2`:
+
+![](images/plots_to_learn.png){width=70%}

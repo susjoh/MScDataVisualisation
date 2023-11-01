@@ -1,11 +1,14 @@
 ---
 title: "Data Visualisation in R"
-author: Dr Susan Johnston [Susan.Johnston@ed.ac.uk](mailto:Susan.Johnston@ed.ac.uk)
+author: "Dr Susan Johnston [Susan.Johnston@ed.ac.uk](mailto:Susan.Johnston@ed.ac.uk)"
 date: "1st November 2023"
-output: learnr::tutorial
-runtime: shiny_prerendered
-description: Practical session on data visualisation with ggplot2. Demonstrator - Sarah Dobson.
+output:
+  pdf_document: default
+  html_document: default
+description: "Practical session on data visualisation with ggplot2. Demonstrator -
+  Sarah Dobson."
 ---
+
 
 ```{r setup, include=FALSE}
 library(learnr)
@@ -33,7 +36,7 @@ Why? A good illustration of why this is important is using a dataset called the 
 
 Each of these 4 data sets has an almost identical results for linear regression (R2, slope and intercept):
 
-```{r Ex1, exercise = TRUE}
+```{r}
 summary(lm(anscombe$y1 ~ anscombe$x1))
 ```
 
@@ -58,7 +61,6 @@ anscombe_plot
 
 ```
 
-
 How would you change your data analysis based on the patterns that you visualise?
 
 ## Simple graphics in R (base graphics)
@@ -67,7 +69,7 @@ One of **R**'s most powerful tools is its ability to produce publication quality
 
 Base **R** contains graphical tools for simple, exploratory graphics. These are easily called with functions such as `hist()` and `plot()`:
 
-```{r Ex3test, exercise = T}
+```{r eval = F}
 library(palmerpenguins)
 
 # histogram
@@ -174,17 +176,19 @@ In this exercise, we will learn about `geom_histogram()`, colour/fill, density p
 
 The first step is to specify our `penguins` dataset in `ggplot2()`:
 
-```{r Ex4, exercise = T}
+```{r eval = F}
 ggplot(penguins)
 ```
 
 Then specify the aesthetic properties using `aes()`. In a histogram, we only have one variable on the x-axis, so we will specify this as:
 
-```{r Ex5, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm))
 ```
 
 You can see by running this line alone, we have already run into a problem - there is no data plotted on the graph! This is because ggplot doesn't know what type of graph we want. We need to specify the `geom` i.e. the type of plot. For a histogram, this is `geom_histogram()`. We add this to our first layer with a `+` sign:
+
+```{r eval = F}
 
 ggplot(penguins, aes(x = flipper_length_mm)) +
   geom_histogram()
@@ -205,7 +209,7 @@ This graph looks good, but not amazing. We can now start to make modifications t
 
 We can add this with `+` and `labs()`. Remember to put text in " "!
 
-```{r Ex7, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm)) +
   geom_histogram() +
   labs(x = "Flipper Length (mm)", y = "Frequency", title = "Histogram of flipper length")
@@ -215,7 +219,7 @@ ggplot(penguins, aes(x = flipper_length_mm)) +
 
 We can specify the outline and fill colours for each bar within the geom that makes that visualisation.
 
-```{r Ex8, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm)) +
   geom_histogram(colour = "blue", fill = "lightblue")
 ```
@@ -226,14 +230,14 @@ A list of all colours in R can be called using the command `colours()` or can be
 
 A common action in R is to colour variables by a categorical or quantitative aspect of the data, in this case, `species`. Let's start afresh:
 
-```{r Ex9, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm)) +
   geom_histogram()
 ```
 
 In this case, because species is defined in the dataset `penguins`, it is an aesthetic property of the data. Therefore, it has to be specified in `aes()`. We can add this using `fill =` in the first line:
 
-```{r Ex10, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(colour = "black")
 ```
@@ -244,7 +248,7 @@ There are two solutions here:
 
 #### Make density plots instead
 
-```{r Ex11, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density()
 
@@ -261,7 +265,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
 
 One nice feature of `ggplot2` is that you can facet your data based on a categorical variable. Let's go back to a simple graph again, and add the line `facet_wrap()` specifying `species`:
 
-```{r Ex12, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm)) +
   geom_histogram() +
   facet_wrap(~species)
@@ -426,7 +430,7 @@ Let's use the same "good graph/bad graph" example with bill length and depth.
 
 We specify our data and `aes()` with x and y, and a new geom, `geom_point()`
 
-```{r Ex13, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point()
 
@@ -436,7 +440,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
 
 The function `stat_smooth()` is built to "aid the eye in seeing patterns" in your data. Let's have a go by adding it as a new layer in our plot:
 
-```{r Ex14, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point() +
   stat_smooth()
@@ -449,11 +453,12 @@ We know that calling a linear regression can be done with `lm()`, which gives th
 
 ```{r}
 lm(bill_depth_mm ~ bill_length_mm, data = penguins)
+
 ```
 
 We can add a linear regression to our graph by specifying that we want to use `lm()` as our smooth function. We do this with `stat_smooth(method = "lm")`:
 
-```{r Ex15, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point() +
   stat_smooth(method = "lm")
@@ -466,7 +471,7 @@ Do you think this is true??
 
 As we know, there is a lot of size differentiation between species, so lets start to group by colour:
 
-```{r Ex16, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
   geom_point() +
   stat_smooth(method = "lm")
@@ -482,7 +487,7 @@ You may have noticed that the same colour scheme is being used again and again. 
 `scale_colour_manual()` - here you can specify the specific colours you would like in a `c()` vector.
 `scale_colour_brewer()` - you can specify palettes that are defined [here](https://r-graph-gallery.com/38-rcolorbrewers-palettes_files/figure-html/thecode-1.png).
 
-```{r Ex17, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
   geom_point() +
   scale_colour_manual(values = c("blue", "red", "purple"))
@@ -500,7 +505,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
 
 Similar to our density points in the previous page, we can also adjust the transparency of the points using `alpha`:
 
-```{r Ex18, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
   geom_point(alpha = 0.8)
 
@@ -511,7 +516,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
 
 and adjust the point size:
 
-```{r Ex19, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
   geom_point(alpha = 0.8, size = 3)
 
@@ -523,7 +528,7 @@ We have the graph above, but we might want to adjust the scale of the axes. We c
 
 We can specify this as a vector e.g. `c(35, 40, 45, 50, 55, 60)`, or we can use a command called `seq()`. This works as seq(start, stop, interval): in our case, `seq(35, 60, 5)`
 
-```{r Ex20, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
   geom_point() +
   scale_x_continuous(breaks = seq(35, 60, 5))
@@ -593,7 +598,7 @@ Hint: use the tab key to look at the command options :)
 
 It is possible to specify aesthetic properties of the graph within each `geom_...()` object. For example, these four commands give you the same graph. Note that in the third example, colour is still an aesthetic property of the data, and so must be in `aes()`:
 
-```{r Ex21, exercise = T}
+```{r eval = F}
 ggplot(penguins) +
   geom_point(aes(x = bill_length_mm, y = flipper_length_mm, colour = species))
 
@@ -670,7 +675,7 @@ theme(legend.position = "top")
 The last type of plot we will look at is the boxplot and its relatives. This is a useful type of visualisation for comparing the distribution of a continuous variable (such as flipper length) with a categorical or discrete variable (such as species). We have done this before with `geom_histogram()` and `geom_density()`, but we can also do this in a more formal capacity with `geom_boxplot()`:
 
 
-```{r Ex22, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5)
 
@@ -692,7 +697,7 @@ You can also see that I have added a notch with `notch = T` - this is a good vis
 
 But boxplots are also *not* useful as they do not show the amount of data and the actual distribution of the underlying data. You can also use a violin plot:
 
-```{r Ex23, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_violin()
 
@@ -700,7 +705,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 
 We can combine these together by using two geoms simultaneously. Make sure that the geoms are placed in the order of back to front.
 
-```{r Ex24, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_violin() +
   geom_boxplot(notch = T)
@@ -715,7 +720,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 
 We can edit this by adjusting the geoms.
 
-```{r Ex25, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_violin() +
   geom_boxplot(width = 0.4, notch = T)
@@ -724,7 +729,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 
 We might want to fill by species again, but we need to be careful:
 
-```{r Ex26, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
   geom_violin() +
   geom_boxplot(width = 0.4)
@@ -733,7 +738,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
 
 If we only want to colour the violin plot, a small problem arises. Any data and `aes()` defined within `ggplot` will be applied *globally* to the graph (i.e. every layer), whereas when it is defined within a `geom_...()`, it will be applied *specifically* to that geom. For example, we can take the `fill = species` out of the first layer, and insert it into the specific layer that we want to colour. We must use `aes()` as it is an aesthetic property of the data.
 
-```{r Ex27, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_violin(aes(fill = species)) +
   geom_boxplot(width = 0.4, fill = "grey90", notch = T)
@@ -744,7 +749,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 
 It is also possible to add the points to the boxplot to understand the amount of data, rather than it's distribution. This can be done with `geom_jitter()`. Let's run it by itself. What is does is randomly jitter the points along the axis of the categorical variable (species):
 
-```{r Ex28, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_jitter()
 
@@ -758,7 +763,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 We can add this to the boxplot by specifying both `geom_boxplot()` and `geom_jitter()`:
 
 
-```{r Ex29, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm, colour = species)) +
   geom_boxplot() + 
   geom_jitter(width = 0.3)
@@ -775,7 +780,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm, colour = species)) +
 
 We've done a lot of customisations, but the last frontier is using `theme()`. There are a few built in themes, that you can explore by typing `theme_` and pressing the tab key. My favourite is `theme_bw()`:
 
-```{r Ex30, exercise = T}
+```{r eval = F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm, colour = species)) +
   geom_boxplot() + 
   geom_jitter(width = 0.3, alpha = 0.3) +
