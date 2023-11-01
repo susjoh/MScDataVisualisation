@@ -20,4 +20,11 @@ learnr::run_tutorial("MSc_Data_Vis", package = "MScDataVisualisation")
 
 ```
 
+If the last line throws an error, try this version:
+
+```
+learnr::run_tutorial("MSc_Data_Vis_v2", package = "MScDataVisualisation")
+```
+
+
 Alternatively, you can access the tutorial at https://susjoh.shinyapps.io/MSc_Data_Visualisation
