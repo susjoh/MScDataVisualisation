@@ -78,7 +78,6 @@ plot(flipper_length_mm ~ bill_length_mm, data = penguins)
 
 # boxplot
 boxplot(flipper_length_mm ~ species, data = penguins)
-
 ```
 
 You can do many things you require in base graphics, but common actions and customisation are difficult. Base graphics are good for quick data exploration, but for everything else we recommend the graphics library `ggplot2`. If you want to explore customisation of base graphics, you can access my tutorial [here](https://rstudio-pubs-static.s3.amazonaws.com/7953_4e3efd5b9415444ca065b1167862c349.html).
