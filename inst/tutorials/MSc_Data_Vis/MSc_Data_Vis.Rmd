@@ -69,13 +69,10 @@ Base **R** contains graphical tools for simple, exploratory graphics. These are 
 
 ```{r Ex3test, exercise = T}
 library(palmerpenguins)
-
 # histogram
 hist(penguins$flipper_length_mm)
-
 # plot
 plot(flipper_length_mm ~ bill_length_mm, data = penguins)
-
 # boxplot
 boxplot(flipper_length_mm ~ species, data = penguins)
 ```
