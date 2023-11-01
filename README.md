@@ -16,7 +16,7 @@ To run the practical, run the following code in your RStudio console:
 library(remotes)
 install_github("susjoh/MScDataVisualisation")
 library("MScDataVisualisation")
-learnr::run_tutorial("MSc_Data_Visualisation", package = "MScDataVisualisation")
+learnr::run_tutorial("MSc_Data_Vis", package = "MScDataVisualisation")
 
 ```
 
