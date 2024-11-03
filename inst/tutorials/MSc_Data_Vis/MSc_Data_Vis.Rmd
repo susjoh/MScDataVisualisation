@@ -24,6 +24,7 @@ Data visualisation is an important part of our every day lives e.g such as on th
 Today we will learn how to make and customise four types of plots using the R library `ggplot2`:
 
 ![](images/plots_to_learn.png){width=70%}
+## PLOT YOUR DATA!
 
 ### The first step of any analysis is to PLOT YOUR DATA!
 
