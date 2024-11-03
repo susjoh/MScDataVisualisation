@@ -1071,6 +1071,7 @@ ggplot(penguins, aes(y = species, x = flipper_length_mm, fill = species)) +
 
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_boxplot() + 
+  
   geom_jitter(width = 0.3, alpha = 0.3) +
   theme_bw() +
   labs(x = &quot;Species&quot;, y = &quot;Flipper Length (mm)&quot;, col = &quot;Species&quot;) +
