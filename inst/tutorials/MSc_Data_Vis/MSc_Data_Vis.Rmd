@@ -1,10 +1,10 @@
 ---
 title: "Data Visualisation in R"
 author: Dr Susan Johnston [Susan.Johnston@ed.ac.uk](mailto:Susan.Johnston@ed.ac.uk)
-date: "1st November 2023"
+date: "6th November 2024"
 output: learnr::tutorial
 runtime: shiny_prerendered
-description: Practical session on data visualisation with ggplot2. Demonstrator - Sarah Dobson.
+description: Practical session on data visualisation with ggplot2.
 ---
 
 ```{r setup, include=FALSE}
@@ -61,6 +61,7 @@ anscombe_plot
 
 How would you change your data analysis based on the patterns that you visualise?
 
+
 ## Simple graphics in R (base graphics)
 
 One of **R**'s most powerful tools is its ability to produce publication quality graphics in an automated and reproducible way.
@@ -81,6 +82,7 @@ boxplot(flipper_length_mm ~ species, data = penguins)
 ```
 
 You can do many things you require in base graphics, but common actions and customisation are difficult. Base graphics are good for quick data exploration, but for everything else we recommend the graphics library `ggplot2`. If you want to explore customisation of base graphics, you can access my tutorial [here](https://rstudio-pubs-static.s3.amazonaws.com/7953_4e3efd5b9415444ca065b1167862c349.html).
+
 
 ## Anatomy of a Graph
 
@@ -132,6 +134,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
 
 We will do this using the R library `ggplot2`.
 
+
 ## `ggplot2` - the grammar of graphics.
 
 `ggplot2` is a plotting system in **R** which aims to take the best parts of base graphics and allow for easy plot customisation. It has extensive documentation and examples [here](https://ggplot2.tidyverse.org/reference/index.html)
@@ -153,6 +156,59 @@ Here are the penguins <3
 ![](images/Penguins.png)
 
 Click the link [here](https://allisonhorst.github.io/palmerpenguins/) for more info.
+
+
+
+## Anatomy of a Graph
+
+What's wrong with this graph?
+
+```{r echo = F, warning=F}
+
+ggplot(penguins, aes(bill_length_mm, bill_depth_mm, colour = species)) +
+  geom_point(size = 8) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.text.y = element_text(size = 6),
+        panel.background = element_rect(fill = 'grey50')) +
+  scale_colour_manual(values = c("grey60", "red", "green")) +
+  labs(x = "Bill Length", y = "") +
+  scale_x_continuous(breaks = seq(40, 60, 20)) 
+
+```
+
+<details><summary><font color="blue">**Click here for answers**</font></summary>
+
+* Axes - no y label
+* Axes - font size too small
+* Axes - no units on x label
+* Axes - units too spaced out on x
+* Points - too large and obscure points behind
+* Points - not colourblind friendly
+* Points - not easily visible against background
+* Figure - no legend
+* Figure - no title or label
+* Figure - it's ugly
+
+</details>
+
+If we fix these issues, then it can look a bit nicer:
+
+```{r echo = F, message = F, warning=F}
+
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +    # Dataset and aesthetic properties
+  geom_point(alpha = 0.8, size = 2) +                                       # Make a scatterplot, modify the transparency and size
+  theme_bw() +                                                              # Use the bw theme to remove the grey background
+  labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", colour = "Species") + # Label the x, y and colour parameters
+  scale_colour_brewer(palette = "Dark2") +                                  # Change the colour scheme
+  stat_smooth(method = "lm") +                                              # Add a linear regression line
+  scale_x_continuous(breaks = seq(20, 70, 5)) +                       # Change the scale on the x axis to seq(start, stop, interval)
+  scale_y_continuous(breaks = seq(10, 30, 2))                         # Change the scale on the y axis to seq(start, stop, interval)
+
+```
+
+We will do this using the R library `ggplot2`.
+
 
 ## `ggplot2` basics - a histogram with `geom_histogram()`
 
@@ -185,6 +241,8 @@ ggplot(penguins, aes(x = flipper_length_mm))
 ```
 
 You can see by running this line alone, we have already run into a problem - there is no data plotted on the graph! This is because ggplot doesn't know what type of graph we want. We need to specify the `geom` i.e. the type of plot. For a histogram, this is `geom_histogram()`. We add this to our first layer with a `+` sign:
+
+```{r Ex6, exercise = T}
 
 ggplot(penguins, aes(x = flipper_length_mm)) +
   geom_histogram()
@@ -906,6 +964,7 @@ ggplot(penguins, aes(y = species, x = flipper_length_mm, fill = species)) +
 
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_boxplot() + 
+  
   geom_jitter(width = 0.3, alpha = 0.3) +
   theme_bw() +
   labs(x = "Species", y = "Flipper Length (mm)", col = "Species") +
